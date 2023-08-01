@@ -1,10 +1,11 @@
 import { SortAlgorithmFactory } from "@/algorithms/sort";
 import { SortAlgorithmType } from "@/config/algorithms";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import SortIndex from "./SortIndex";
 import { useAtom } from "jotai";
 import { sortConfigAtom, sortReproduceIndexAtom } from "../atom";
+import { ArrowDownIcon } from "@heroicons/react/24/solid";
 
 interface SortCardsProps {
   randomList: number[];
@@ -41,31 +42,38 @@ const SortCards = ({ randomList }: SortCardsProps) => {
 
   return (
     <>
-      <div className="flex gap-10 flex-wrap justify-start">
+      <div className="flex gap-10 flex-wrap justify-around">
         {(randomList ?? []).map((random, index) => (
           <SortIndex key={`random-${index}`}>{random}</SortIndex>
         ))}
       </div>
+      <div className="flex justify-center">
+        <ArrowDownIcon height={40} />
+      </div>
       {sortedValue.slice(0, reproduceIndex).map((sorted, index) => (
-        <div
-          key={index + "-serie"}
-          className="flex gap-10 flex-wrap justify-start"
-        >
-          {sorted.list.map((sortedItem) => (
-            <SortIndex
-              key={`${index}-${sortedItem}`}
-              color={
-                sorted.currentValue === sortedItem
-                  ? "current"
-                  : sorted.affectedItems.includes(sortedItem)
-                  ? "affected"
-                  : undefined
-              }
-            >
-              {sortedItem}
-            </SortIndex>
-          ))}
-        </div>
+        <Fragment key={index + "-serie"}>
+          <div className="flex gap-10 flex-wrap justify-around">
+            {sorted.list.map((sortedItem) => (
+              <SortIndex
+                key={`${index}-${sortedItem}`}
+                color={
+                  sorted.currentValue === sortedItem
+                    ? "current"
+                    : sorted.affectedItems.includes(sortedItem)
+                    ? "affected"
+                    : undefined
+                }
+              >
+                {sortedItem}
+              </SortIndex>
+            ))}
+          </div>
+          {index < sortedValue.length - 1 && (
+            <div className="flex justify-center">
+              <ArrowDownIcon height={40} />
+            </div>
+          )}
+        </Fragment>
       ))}
     </>
   );
