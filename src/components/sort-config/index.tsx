@@ -19,7 +19,7 @@ const SortConfig = ({}: SortConfigProps) => {
   };
 
   return (
-    <div className="bg-gray-800 rounded-md p-4 gap-3 flex items-end w-6/12">
+    <div className="bg-gray-800 rounded-md p-4 gap-3 flex items-end w-fit">
       <Input
         type="number"
         id="number-of-items"
