@@ -276,7 +276,7 @@ class QuickSortAlgorithm implements ISortAlgorithm {
   }
 
   sort(arr: number[]): ISortResult[] {
-    this.size = arr.length
+    this.size = arr.length;
     this.internalSort(arr);
     return this.result;
   }
@@ -306,13 +306,11 @@ class QuickSortAlgorithm implements ISortAlgorithm {
       ...this.internalSort(rightArray),
     ];
 
-    if (finalValue.length === this.size) {
-      this.result.push({
-        affectedItems: finalValue,
-        currentValue: pivotIndex,
-        list: finalValue,
-      });
-    }
+    this.result.push({
+      affectedItems: finalValue,
+      currentValue: pivotIndex,
+      list: finalValue,
+    });
 
     return finalValue;
   }
