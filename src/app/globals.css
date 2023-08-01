@@ -2,3 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+.base-layout {
+  scrollbar-color: var(--tw-color-gray-700) var(--tw-color-gray-900); /* thumb color and track color */
+  scrollbar-width: thin;
+  color-scheme: dark;
+}
+
+/* Set the custom styles for the scroll bar */
+/* Note: These styles may not work in all browsers */
+.base-layout::-webkit-scrollbar {
+  width: 10px;
+}
+
+.base-layout::-webkit-scrollbar-thumb {
+  background-color: var(--tw-color-gray-700);
+}
+
+.base-layout::-webkit-scrollbar-track {
+  background-color: var(--tw-color-gray-900);
+}
